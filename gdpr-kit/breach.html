@@ -1,2 +1,1556 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta http-equiv="refresh" content="1;url=https://gdpr.legalaipay.com/breach.html"><title>Opening GDPR Breach Tool | LegalAIPay</title><style>body{font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Arial,sans-serif;background:#f6f8fb;color:#172033;margin:0;display:grid;min-height:100vh;place-items:center}.card{max-width:560px;background:white;border:1px solid #dfe5ee;border-radius:12px;padding:28px;box-shadow:0 10px 30px rgba(30,44,70,.08)}a{color:#2f66b3;font-weight:700}</style></head><body><main class="card"><h1>Opening GDPR Breach Tool</h1><p>The full GDPR breach tool is opening now.</p><p><a href="https://gdpr.legalaipay.com/breach.html">Open GDPR Breach Tool</a></p></main></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Breach Notification (Art. 33/34) — LegalAIPay GDPR Kit</title>
+<style>
+:root{--bg:#fdf6e3;--fg:#1a1a1a;--muted:#6b7280;--accent:#2563eb;--accent-light:#dbeafe;--border:#d1d5db;--card:#fff;--err:#dc2626;--warn:#f59e0b;--ok:#16a34a;--radius:6px;--shadow:0 1px 3px rgba(0,0,0,.08);--step-done:#16a34a;--step-active:#2563eb;--step-todo:#d1d5db;--critical:#991b1b;--high:#dc2626;--medium:#f59e0b;--low:#16a34a}
+  @media(prefers-color-scheme:dark){:root{--bg:#111;--fg:#e5e5e5;--muted:#9ca3af;--accent:#60a5fa;--accent-light:#1e3a5f;--border:#374151;--card:#1f2937;--shadow:0 1px 3px rgba(0,0,0,.3)}}*,*::before,*::after{box-sizing:border-box;margin:0}
+body{font:15px/1.6 -apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;background:var(--bg);color:var(--fg);padding:0}
+a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
+/* ── Toolbar ── */
+.toolbar{position:sticky;top:0;z-index:100;display:flex;align-items:center;gap:8px;padding:8px 16px;background:var(--card);border-bottom:1px solid var(--border);box-shadow:var(--shadow);flex-wrap:wrap}
+.toolbar .logo{font-weight:700;font-size:14px;letter-spacing:-.3px;white-space:nowrap}
+.toolbar .logo span{color:var(--accent)}
+.toolbar .spacer{flex:1}
+.tbtn{font:inherit;font-size:13px;padding:5px 10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);color:var(--fg);cursor:pointer;white-space:nowrap}
+.tbtn:hover{background:var(--accent-light)}
+.tbtn.primary{background:var(--accent);color:#fff;border-color:var(--accent)}
+.tbtn.primary:hover{opacity:.9}
+/* ── Step indicator ── */
+.steps-bar{display:flex;gap:0;padding:12px 16px;background:var(--card);border-bottom:1px solid var(--border);overflow-x:auto}
+.step-pill{font-size:12px;padding:6px 14px;border:1px solid var(--border);cursor:pointer;white-space:nowrap;background:var(--bg);color:var(--muted);transition:.15s}
+.step-pill:first-child{border-radius:var(--radius) 0 0 var(--radius)}
+.step-pill:last-child{border-radius:0 var(--radius) var(--radius) 0}
+.step-pill+.step-pill{border-left:0}
+.step-pill.active{background:var(--accent);color:#fff;border-color:var(--accent);font-weight:600}
+.step-pill.done{background:var(--step-done);color:#fff;border-color:var(--step-done)}
+/* ── Layout ── */
+.container{max-width:920px;margin:0 auto;padding:20px 16px 80px}
+.section{display:none;animation:fadeIn .2s}
+.section.active{display:block}
+@keyframes fadeIn{from{opacity:0;transform:translateY(6px)}to{opacity:1;transform:none}}
+h2{font-size:20px;margin:0 0 4px;font-weight:700}
+h3{font-size:16px;margin:20px 0 8px;font-weight:600;color:var(--fg)}
+h4{font-size:14px;margin:16px 0 6px;font-weight:600;color:var(--muted)}
+.subtitle{font-size:13px;color:var(--muted);margin-bottom:16px}
+.edpb-ref{font-size:11px;color:var(--muted);font-style:italic;margin-bottom:12px}
+/* ── Form elements ── */
+fieldset{border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:12px 0;background:var(--card)}
+legend{font-size:13px;font-weight:600;padding:0 6px;color:var(--accent)}
+label{display:block;font-size:13px;font-weight:500;margin:10px 0 3px}
+label.inline{display:inline-flex;align-items:center;gap:6px;font-weight:400;margin:4px 0;cursor:pointer}
+input[type=text],input[type=number],input[type=date],input[type=datetime-local],input[type=email],input[type=tel],textarea,select{font:inherit;font-size:14px;width:100%;padding:7px 10px;border:1px solid var(--border);border-radius:var(--radius);background:var(--card);color:var(--fg)}
+textarea{resize:vertical;min-height:70px}
+select{cursor:pointer}
+input:focus,textarea:focus,select:focus{outline:2px solid var(--accent);outline-offset:-1px}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:600px){.row{grid-template-columns:1fr}}
+.checkbox-grid{display:flex;flex-wrap:wrap;gap:4px 16px;margin:6px 0}
+.tooltip{font-size:12px;color:var(--muted);margin:2px 0 6px;line-height:1.4}
+.conditional{display:none;margin-left:16px;padding-left:12px;border-left:2px solid var(--accent-light);animation:fadeIn .15s}
+.conditional.show{display:block}
+/* ── Severity badge ── */
+.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:12px;text-transform:uppercase}
+.badge.critical{background:#fee2e2;color:var(--critical)}
+.badge.high{background:#fecaca;color:var(--high)}
+.badge.medium{background:#fef3c7;color:#92400e}
+.badge.low{background:#dcfce7;color:#166534}
+/* ── Output panels ── */
+.output-panel{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:16px;margin:12px 0;white-space:pre-wrap;font-size:13px;line-height:1.7;max-height:500px;overflow-y:auto}
+.output-panel h4{margin:0 0 8px;color:var(--accent)}
+/* ── Navigation ── */
+.nav-row{display:flex;justify-content:space-between;margin-top:24px;padding-top:16px;border-top:1px solid var(--border)}
+.nav-row .tbtn{min-width:100px}
+/* ── Privacy note ── */
+.privacy-note{font-size:11px;color:var(--muted);text-align:center;padding:12px;margin-top:24px;border-top:1px solid var(--border)}
+/* ── EDPB banner ── */
+.edpb-banner{background:var(--accent-light);border:1px solid var(--accent);border-radius:var(--radius);padding:10px 14px;margin-bottom:16px;font-size:12px;line-height:1.5}
+.edpb-banner strong{color:var(--accent)}
+/* ── Severity meter ── */
+.severity-meter{height:8px;border-radius:4px;background:var(--border);margin:8px 0;overflow:hidden}
+.severity-meter .fill{height:100%;border-radius:4px;transition:width .3s,background .3s}
+/* ── Country selector ── */
+.country-chips{display:flex;flex-wrap:wrap;gap:4px;margin:6px 0}
+.country-chip{font-size:11px;padding:3px 8px;border:1px solid var(--border);border-radius:12px;cursor:pointer;user-select:none}
+.country-chip.selected{background:var(--accent);color:#fff;border-color:var(--accent)}
+/* ── Obligations table ── */
+.obligations-table{width:100%;border-collapse:collapse;font-size:13px;margin:12px 0}
+.obligations-table th,.obligations-table td{text-align:left;padding:6px 10px;border-bottom:1px solid var(--border)}
+.obligations-table th{background:var(--bg);font-weight:600;font-size:12px;text-transform:uppercase;letter-spacing:.3px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<!-- ═══ TOOLBAR ═══ -->
+<div class="toolbar">
+  <a href="https://legalaipay.com/" title="Back to LegalAIPay home" class="logo"><span>L</span>LegalAIPay<span>GDPR Kit</span></a>
+  <a href="https://gdpr.legalaipay.com/dashboard.html" class="tbtn">Dashboard</a>
+  <div class="spacer"></div>
+  <button class="tbtn primary" onclick="runAssess()">⚙️ Assess</button>
+  <button class="tbtn" onclick="saveLocal()">💾 Save</button>
+  <button class="tbtn" onclick="loadLocal()">📂 Load</button>
+  <button class="tbtn" onclick="exportHTML()">📄 HTML</button>
+  <button class="tbtn" onclick="exportJSON()">{ } JSON</button>
+  <button class="tbtn" onclick="window.print()">🖨 Print</button>
+</div>
+
+<!-- ═══ STEP BAR ═══ -->
+<div class="steps-bar" id="stepsBar">
+  <div class="step-pill active" data-step="1" onclick="goStep(1)">1 · Notification</div>
+  <div class="step-pill" data-step="2" onclick="goStep(2)">2 · Controller</div>
+  <div class="step-pill" data-step="3" onclick="goStep(3)">3 · Breach facts</div>
+  <div class="step-pill" data-step="4" onclick="goStep(4)">4 · Risk & measures</div>
+  <div class="step-pill" data-step="5" onclick="goStep(5)">5 · Communication</div>
+  <div class="step-pill" data-step="6" onclick="goStep(6)">6 · Cross-border</div>
+  <div class="step-pill" data-step="7" onclick="goStep(7)">7 · Output</div>
+</div>
+
+<div class="container">
+<div class="privacy-note">Your data stays in your browser. Stored in localStorage on this device only — nothing is sent to a server.</div>
+
+<div class="edpb-banner">
+  <strong>EDPB Common Template (v1.0, adopted 8 June 2026)</strong> — This form implements the European Data Protection Board's common template for personal data breach notification under GDPR Art. 33. Public consultation closes 5 Aug 2026. Fields and structure follow the official template; the ENISA severity methodology is retained as a supplementary risk-scoring tool.
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     SECTION 1 — INFORMATION ON THE NOTIFICATION  (EDPB §1)
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="section active" id="sec1">
+<h2>§1 — Information on the notification</h2>
+<p class="subtitle">EDPB Template §1 · Type, sub-type, and reference numbers</p>
+
+<fieldset>
+<legend>1.1 Type of notification</legend>
+
+<label>Type of notification *</label>
+<select id="notifType" onchange="toggleConditionals()">
+  <option value="">— select —</option>
+  <option value="new">New notification</option>
+  <option value="followup">Follow-up notification</option>
+</select>
+
+<label>Sub-type of notification *</label>
+<select id="notifSubType" onchange="toggleConditionals()">
+  <option value="">— select —</option>
+  <option value="complete">Complete — all required information provided</option>
+  <option value="incomplete">Incomplete — preliminary, to be amended</option>
+  <option value="withdraw" id="optWithdraw" style="display:none">Withdraw — cancel a previous notification</option>
+</select>
+
+<div class="conditional" id="condWithdraw">
+  <label>Reasons for withdrawing *</label>
+  <textarea id="withdrawReasons" placeholder="e.g. duplicate entry, no risk after initial assessment"></textarea>
+</div>
+
+<div class="conditional" id="condPrevId">
+  <label>ID of previously notified breach *</label>
+  <input type="text" id="prevBreachId" placeholder="Reference ID from SA">
+</div>
+
+<label>Controller's internal reference number</label>
+<input type="text" id="internalRef" placeholder="Your internal incident ID">
+</fieldset>
+
+<div class="nav-row">
+  <span></span>
+  <button class="tbtn primary" onclick="goStep(2)">Next → Controller</button>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     SECTION 2 — CONTROLLER & REPORTING PERSON  (EDPB §2)
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="sec2">
+<h2>§2 — Controller &amp; reporting person</h2>
+<p class="subtitle">EDPB Template §2 · Identification, DPO, involved parties</p>
+
+<fieldset>
+<legend>2.1 About the data controller</legend>
+
+<label>Name of the organisation *</label>
+<input type="text" id="ctrlName">
+
+<div class="row">
+  <div>
+    <label>Sector</label>
+    <select id="ctrlSector">
+      <option value="">— select —</option>
+      <option value="private">Private</option>
+      <option value="public">Public</option>
+    </select>
+  </div>
+  <div>
+    <label>Type of organisation</label>
+    <select id="ctrlOrgType" onchange="toggleConditionals()">
+      <option value="">— select —</option>
+      <option value="micro">Freelance or Microenterprise</option>
+      <option value="sme">Small or Medium Enterprise</option>
+      <option value="large">Large Enterprise</option>
+      <option value="other">Others</option>
+    </select>
+  </div>
+</div>
+
+<div class="conditional" id="condOrgTypeOther">
+  <label>Further description of organisation type</label>
+  <input type="text" id="ctrlOrgTypeOther">
+</div>
+
+<label>Classification of economic activity (NACE Rev. 2.1)</label>
+<select id="ctrlNACE">
+  <option value="">— select —</option>
+  <option value="A">A — Agriculture, Forestry and Fishing</option>
+  <option value="B">B — Mining and Quarrying</option>
+  <option value="C">C — Manufacturing</option>
+  <option value="D">D — Electricity, Gas, Steam and Air Conditioning</option>
+  <option value="E">E — Water Supply; Sewerage, Waste Management</option>
+  <option value="F">F — Construction</option>
+  <option value="G">G — Wholesale and Retail Trade</option>
+  <option value="H">H — Transportation and Storage</option>
+  <option value="I">I — Accommodation and Food Service</option>
+  <option value="J">J — Publishing, Broadcasting, Content Production</option>
+  <option value="K">K — Telecom, IT, Information Services</option>
+  <option value="L">L — Financial and Insurance</option>
+  <option value="M">M — Real Estate</option>
+  <option value="N">N — Professional, Scientific and Technical</option>
+  <option value="O">O — Administrative and Support Service</option>
+  <option value="P">P — Public Administration and Defence</option>
+  <option value="Q">Q — Education</option>
+  <option value="R">R — Human Health and Social Work</option>
+  <option value="S">S — Arts, Sports and Recreation</option>
+  <option value="T">T — Other Service Activities</option>
+  <option value="U">U — Activities of Households as Employers</option>
+  <option value="V">V — Extraterritorial Organisations</option>
+</select>
+
+<label>Contact details (address, phone, email) *</label>
+<textarea id="ctrlContact" rows="3"></textarea>
+
+<label>Type of identifier</label>
+<div class="row">
+  <select id="ctrlIdType">
+    <option value="">— select —</option>
+    <option value="company">Company ID</option>
+    <option value="org">Organisation number</option>
+    <option value="vat">VAT number</option>
+  </select>
+  <input type="text" id="ctrlIdValue" placeholder="Identifier value">
+</div>
+
+<label>Controller established in EEA?</label>
+<select id="ctrlInEEA" onchange="toggleConditionals()">
+  <option value="yes">Yes</option>
+  <option value="no">No</option>
+</select>
+
+<div class="conditional" id="condRepEEA">
+  <label>Name of representative in EEA *</label>
+  <input type="text" id="repName">
+  <label>Contact details of representative *</label>
+  <textarea id="repContact" rows="2"></textarea>
+</div>
+</fieldset>
+
+<fieldset>
+<legend>2.2 Identity of the reporting person</legend>
+<div class="row">
+  <div>
+    <label>Name *</label>
+    <input type="text" id="repPersonName">
+  </div>
+  <div>
+    <label>Function *</label>
+    <select id="repPersonFunc" onchange="toggleConditionals()">
+      <option value="">— select —</option>
+      <option value="dpo">DPO</option>
+      <option value="legal">Legal representative</option>
+      <option value="other">Authorised representative or other</option>
+    </select>
+  </div>
+</div>
+<div class="conditional" id="condRepFuncOther">
+  <label>Description of function *</label>
+  <input type="text" id="repPersonFuncDesc">
+</div>
+<label>Contact details *</label>
+<textarea id="repPersonContact" rows="2"></textarea>
+</fieldset>
+
+<fieldset>
+<legend>2.3 DPO &amp; contact point</legend>
+
+<label>Is a DPO designated? *</label>
+<select id="dpoDesignated" onchange="toggleConditionals()">
+  <option value="">— select —</option>
+  <option value="yes">Yes</option>
+  <option value="no">No</option>
+</select>
+
+<div class="conditional" id="condDPO">
+  <label>DPO name *</label>
+  <input type="text" id="dpoName">
+  <label>DPO contact details *</label>
+  <textarea id="dpoContact" rows="2"></textarea>
+</div>
+
+<label>More information about the incident can be obtained from</label>
+<select id="contactPoint">
+  <option value="dpo">DPO</option>
+  <option value="reporter">Reporting person</option>
+  <option value="other">Other — specify below</option>
+</select>
+<div class="conditional" id="condContactOther">
+  <label>Contact person name</label>
+  <input type="text" id="contactOtherName">
+  <label>Function</label>
+  <input type="text" id="contactOtherFunc">
+  <label>Contact details</label>
+  <textarea id="contactOtherDetails" rows="2"></textarea>
+</div>
+</fieldset>
+
+<fieldset>
+<legend>2.4 Involvement of other parties</legend>
+
+<label>Are other parties (processors, joint controllers) involved? *</label>
+<select id="otherParties" onchange="toggleConditionals()">
+  <option value="">— select —</option>
+  <option value="yes">Yes</option>
+  <option value="no">No</option>
+</select>
+
+<div class="conditional" id="condOtherParties">
+  <div id="partyList"></div>
+  <button class="tbtn" onclick="addParty()">+ Add party</button>
+</div>
+</fieldset>
+
+<div class="nav-row">
+  <button class="tbtn" onclick="goStep(1)">← Back</button>
+  <button class="tbtn primary" onclick="goStep(3)">Next → Breach facts</button>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     SECTION 3 — INITIAL INFORMATION ON THE BREACH  (EDPB §3)
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="sec3">
+<h2>§3 — Initial information on the breach</h2>
+<p class="subtitle">EDPB Template §3 · Timeline, nature, data subjects, data records, measures in place</p>
+
+<fieldset>
+<legend>3.1 Timeline</legend>
+
+<label>When did the breach occur? *</label>
+<select id="breachWhen" onchange="toggleConditionals()">
+  <option value="">— select —</option>
+  <option value="specific">On a specific day</option>
+  <option value="range">From a date to a date</option>
+  <option value="ongoing">From a date and still ongoing</option>
+  <option value="unknown">Cannot be determined</option>
+  <option value="tbd">To be determined (incomplete notification only)</option>
+</select>
+
+<div class="conditional" id="condBreachDates">
+  <label class="inline"><input type="checkbox" id="estimatedDates"> Only estimated dates are possible</label>
+  <div class="row">
+    <div>
+      <label>Beginning date &amp; time *</label>
+      <input type="datetime-local" id="breachStart">
+    </div>
+    <div id="breachEndWrap">
+      <label>Ending date &amp; time</label>
+      <input type="datetime-local" id="breachEnd">
+    </div>
+  </div>
+</div>
+
+<label>Date &amp; time controller became aware of breach * (start of 72-hour clock)</label>
+<input type="datetime-local" id="awareAt">
+<div id="lateNotifWarn" class="conditional">
+  <label>Reasons for late notification *</label>
+  <textarea id="lateReasons" placeholder="Explain why notification is beyond 72 hours"></textarea>
+</div>
+
+<label>How was the breach discovered? *</label>
+<select id="howDiscovered">
+  <option value="">— select —</option>
+  <option value="controller">Detection by the data controller</option>
+  <option value="processor">Detection and communication by the data processor</option>
+  <option value="subject">Communication by a data subject</option>
+  <option value="external">Communication by an external party</option>
+  <option value="press">Press news</option>
+  <option value="other">Other</option>
+</select>
+
+<label>Further description of how the breach was discovered *</label>
+<textarea id="howDiscoveredDesc" placeholder="e.g. IDS alert, coordinated vulnerability disclosure, audit finding…"></textarea>
+
+<div class="conditional" id="condExtDate">
+  <label>Date of notification by other party</label>
+  <input type="datetime-local" id="extNotifDate">
+</div>
+
+<label>Further comments on timeline</label>
+<textarea id="timelineComments" placeholder="Overview of relevant timeline events, duration of impacts on CIA, awareness date of processor, etc."></textarea>
+</fieldset>
+
+<fieldset>
+<legend>3.2 Nature &amp; circumstances of the breach</legend>
+
+<h4>Nature of the breach * (select all that apply)</h4>
+<div class="checkbox-grid">
+  <label class="inline"><input type="checkbox" id="natConf" onchange="toggleConditionals()"> Confidentiality breach</label>
+  <label class="inline"><input type="checkbox" id="natInteg" onchange="toggleConditionals()"> Integrity breach</label>
+  <label class="inline"><input type="checkbox" id="natAvail" onchange="toggleConditionals()"> Availability breach</label>
+</div>
+
+<div class="conditional" id="condConf">
+  <label>Type of confidentiality breach *</label>
+  <select id="confType">
+    <option value="">— select —</option>
+    <option value="exfiltrated">Data are exfiltrated or disclosed</option>
+    <option value="likely_exfil">Likely exfiltrated or disclosed (no evidence)</option>
+    <option value="not_exfil">NOT exfiltrated nor disclosed (reasonable evidence)</option>
+    <option value="no_assess">Not possible to assess</option>
+    <option value="tbd">To be determined</option>
+  </select>
+  <label>Was the data unintelligible to unauthorised persons? *</label>
+  <select id="confProtection">
+    <option value="">— select —</option>
+    <option value="intact">Yes — protection still intact (e.g. encrypted)</option>
+    <option value="subvertable">Protective measures taken but likely subvertable</option>
+    <option value="no">No</option>
+    <option value="no_assess">Not possible to assess</option>
+    <option value="tbd">To be determined</option>
+  </select>
+</div>
+
+<div class="conditional" id="condInteg">
+  <label>Type of integrity breach *</label>
+  <select id="integType">
+    <option value="">— select —</option>
+    <option value="no_misuse">Alteration, no evidence of illegal/wrong use</option>
+    <option value="misuse_reversible">Alteration with illegal use, damages reversible</option>
+    <option value="misuse_irreversible">Alteration with illegal use, damages NOT reversible</option>
+  </select>
+</div>
+
+<div class="conditional" id="condAvail">
+  <label>Type of availability breach *</label>
+  <select id="availType">
+    <option value="">— select —</option>
+    <option value="temporary">Temporary availability issue</option>
+    <option value="permanent">Permanent availability issue</option>
+    <option value="tbd">Not determined</option>
+  </select>
+</div>
+
+<label>Nature of the incident * (select all that apply)</label>
+<div class="checkbox-grid" id="incidentNatureGrid">
+  <label class="inline"><input type="checkbox" name="incNat" value="abuse_access"> Abuse of access privileges</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="ransomware"> Ransomware / encrypted device</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="hacking"> Hacking / malware</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="phishing"> Phishing / social engineering</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="vuln"> Security vulnerability exploited</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="unauth_access"> Unauthorised access to IT systems</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="exfiltration"> Data exfiltration</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="mixup"> Data subject mix-up</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="device_lost"> Device lost or stolen</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="ewaste"> E-waste (data on obsolete device)</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="paper_disposal"> Incorrect disposal of paper</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="mail_lost"> Mail lost / misdelivery</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="misconfig"> Misconfiguration</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="wrong_perms"> Incorrect access permissions</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="paper_lost"> Paper lost or stolen</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="deleted"> Data deleted / destroyed</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="wrong_recip"> Data displayed to wrong recipient</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="sent_mistake"> Data sent by mistake</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="email_nocc"> Email without BCC / open list</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="tech_malfunction"> Technical malfunction</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="unauth_mod"> Unauthorised data modification</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="unintended_pub"> Unintended publication</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="verbal"> Verbal unauthorised disclosure</label>
+  <label class="inline"><input type="checkbox" name="incNat" value="other_nat"> Other</label>
+</div>
+
+<label>Cause of the breach *</label>
+<select id="breachCause">
+  <option value="">— select —</option>
+  <option value="int_nonmal">Internal non-malicious</option>
+  <option value="int_mal">Internal malicious</option>
+  <option value="ext_nonmal">External non-malicious</option>
+  <option value="ext_mal">External malicious</option>
+  <option value="tbd">To be determined</option>
+  <option value="unknown">Unknown</option>
+</select>
+
+<label>Further description of the nature of the incident *</label>
+<textarea id="incidentDesc" rows="4" placeholder="Describe detection, awareness, cause, measures in place. Indicate the root cause if possible."></textarea>
+
+<label>Systems, software, services, and infrastructure involved *</label>
+<textarea id="systemsDesc" rows="4" placeholder="List in semantic groups, e.g.:\nSystems: production database (client DB, located in…)\nSoftware: accounting software, payment system\nInfrastructure: AWS eu-west-1 region"></textarea>
+</fieldset>
+
+<fieldset>
+<legend>3.3 Categories &amp; number of data subjects</legend>
+
+<label>Categories of concerned data subjects * (select all that apply)</label>
+<div class="checkbox-grid">
+  <label class="inline"><input type="checkbox" name="dsCat" value="customers"> Customers (current &amp; prospects)</label>
+  <label class="inline"><input type="checkbox" name="dsCat" value="employees"> Employees (former, current, candidates)</label>
+  <label class="inline"><input type="checkbox" name="dsCat" value="military"> Military or law enforcement staff</label>
+  <label class="inline"><input type="checkbox" name="dsCat" value="minors"> Minors</label>
+  <label class="inline"><input type="checkbox" name="dsCat" value="patients"> Patients</label>
+  <label class="inline"><input type="checkbox" name="dsCat" value="students"> Students</label>
+  <label class="inline"><input type="checkbox" name="dsCat" value="subscribers"> Subscribers</label>
+  <label class="inline"><input type="checkbox" name="dsCat" value="users"> Users</label>
+  <label class="inline"><input type="checkbox" name="dsCat" value="vulnerable"> Vulnerable individuals</label>
+  <label class="inline"><input type="checkbox" name="dsCat" value="other_ds"> Additional (specify below)</label>
+</div>
+<label>Further description of data subjects</label>
+<textarea id="dsDesc" rows="2"></textarea>
+
+<div class="row">
+  <div>
+    <label>Number of data subjects *</label>
+    <select id="dsNumType">
+      <option value="exact">Exact number</option>
+      <option value="approx">Approximate number</option>
+      <option value="unknown">Cannot be determined</option>
+      <option value="tbd">To be determined</option>
+    </select>
+  </div>
+  <div>
+    <label>Number</label>
+    <input type="number" id="dsNum" min="0">
+  </div>
+</div>
+</fieldset>
+
+<fieldset>
+<legend>3.4 Categories &amp; number of personal data records</legend>
+
+<label>Type of breached data * (select all that apply)</label>
+<div class="checkbox-grid">
+  <label class="inline"><input type="checkbox" name="dataCat" value="basic"> Basic data (name, DOB)</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="contact"> Contact details</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="biometric"> Biometric data</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="criminal"> Criminal convictions</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="political"> Political opinions</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="ethnic"> Racial or ethnic origin</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="religion"> Religious / philosophical beliefs</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="sexual"> Sex life or sexual orientation</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="union"> Trade union membership</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="genetic"> Genetic data</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="health"> Health data</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="financial"> Economic and financial data</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="emp_health"> Employment-related health data</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="national_id"> Identification data (national ID)</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="location"> Location data</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="official_doc"> Official documents (scanned)</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="payment"> Payment methods (cards, bank)</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="profile"> Profile data (social, credit score)</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="credentials"> User credentials</label>
+  <label class="inline"><input type="checkbox" name="dataCat" value="other_data"> Additional (specify)</label>
+</div>
+<label>Further description of breached data</label>
+<textarea id="dataDesc" rows="2"></textarea>
+
+<div class="row">
+  <div>
+    <label>Number of records *</label>
+    <select id="recNumType">
+      <option value="exact">Exact number</option>
+      <option value="approx">Approximate number</option>
+      <option value="unknown">Cannot be determined</option>
+      <option value="tbd">To be determined</option>
+    </select>
+  </div>
+  <div>
+    <label>Number</label>
+    <input type="number" id="recNum" min="0">
+  </div>
+</div>
+</fieldset>
+
+<fieldset>
+<legend>3.5 Measures in place when the breach occurred</legend>
+
+<label>Relevant measures in place * (select all that apply)</label>
+<div class="checkbox-grid">
+  <label class="inline"><input type="checkbox" name="measPre" value="pseudo"> Pseudonymisation</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="backup"> Backup / Recovery plan</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="encrypt"> Data encryption</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="policy"> DP &amp; InfoSec policies</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="training"> DP &amp; security training</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="incident_log"> Incident log</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="access_levels"> Levels of access to data</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="mfa"> Logical access control (MFA)</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="audit"> Periodic audits</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="physical"> Physical access control</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="uptodate"> Up-to-date IT systems</label>
+  <label class="inline"><input type="checkbox" name="measPre" value="other_meas"> Other (specify below)</label>
+</div>
+<label>Further description of measures in place</label>
+<textarea id="measPreDesc" rows="3"></textarea>
+</fieldset>
+
+<div class="nav-row">
+  <button class="tbtn" onclick="goStep(2)">← Back</button>
+  <button class="tbtn primary" onclick="goStep(4)">Next → Risk &amp; measures</button>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     SECTION 4 — FURTHER INFORMATION / RISK  (EDPB §4)
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="sec4">
+<h2>§4 — Risk assessment &amp; measures</h2>
+<p class="subtitle">EDPB Template §4 · Consequences, risk, mitigation, prevention</p>
+
+<fieldset>
+<legend>4.1 Likely consequences &amp; adverse effects</legend>
+
+<div id="confConseq" style="display:none">
+  <h4>Consequences of confidentiality breach</h4>
+  <div class="checkbox-grid">
+    <label class="inline"><input type="checkbox" name="confCons" value="beyond_scope"> Data disclosed beyond privacy policy scope</label>
+    <label class="inline"><input type="checkbox" name="confCons" value="linkable"> Data linkable with other information</label>
+    <label class="inline"><input type="checkbox" name="confCons" value="other_purpose"> Data may be used for other/unlawful purposes</label>
+    <label class="inline"><input type="checkbox" name="confCons" value="other_conf"> Other</label>
+    <label class="inline"><input type="checkbox" name="confCons" value="under_assess"> Under assessment</label>
+  </div>
+  <label>Description of other confidentiality consequences</label>
+  <textarea id="confConsDesc" rows="2"></textarea>
+</div>
+
+<div id="integConseq" style="display:none">
+  <h4>Consequences of integrity breach</h4>
+  <div class="checkbox-grid">
+    <label class="inline"><input type="checkbox" name="integCons" value="invalid_used"> Modified data may have been used as valid</label>
+    <label class="inline"><input type="checkbox" name="integCons" value="modified_other"> Modified into valid data and used for other purposes</label>
+    <label class="inline"><input type="checkbox" name="integCons" value="other_integ"> Other</label>
+    <label class="inline"><input type="checkbox" name="integCons" value="under_assess"> Under assessment</label>
+  </div>
+  <label>Description of other integrity consequences</label>
+  <textarea id="integConsDesc" rows="2"></textarea>
+</div>
+
+<div id="availConseq" style="display:none">
+  <h4>Consequences of availability breach</h4>
+  <div class="checkbox-grid">
+    <label class="inline"><input type="checkbox" name="availCons" value="no_access"> Inability to access services</label>
+    <label class="inline"><input type="checkbox" name="availCons" value="disruption"> Service disruptions</label>
+    <label class="inline"><input type="checkbox" name="availCons" value="other_avail"> Other</label>
+    <label class="inline"><input type="checkbox" name="availCons" value="under_assess"> Under assessment</label>
+  </div>
+  <label>Description of other availability consequences</label>
+  <textarea id="availConsDesc" rows="2"></textarea>
+</div>
+
+<h4>Nature of potential impact for data subjects * (select all)</h4>
+<div class="checkbox-grid">
+  <label class="inline"><input type="checkbox" name="impact" value="loss_control"> Loss of control of personal data</label>
+  <label class="inline"><input type="checkbox" name="impact" value="rights_limit"> Limitation of rights</label>
+  <label class="inline"><input type="checkbox" name="impact" value="discrimination"> Discrimination</label>
+  <label class="inline"><input type="checkbox" name="impact" value="id_theft"> Identity theft or usurpation</label>
+  <label class="inline"><input type="checkbox" name="impact" value="fraud"> Fraud</label>
+  <label class="inline"><input type="checkbox" name="impact" value="financial_loss"> Financial loss</label>
+  <label class="inline"><input type="checkbox" name="impact" value="reverse_pseudo"> Unauthorised reversal of pseudonymisation</label>
+  <label class="inline"><input type="checkbox" name="impact" value="reputation"> Damage to reputation</label>
+  <label class="inline"><input type="checkbox" name="impact" value="professional_secrecy"> Loss of professional secrecy</label>
+  <label class="inline"><input type="checkbox" name="impact" value="unauth_disclosure"> Disclosure to unauthorised third parties</label>
+  <label class="inline"><input type="checkbox" name="impact" value="econ_social"> Significant economic or social disadvantage</label>
+  <label class="inline"><input type="checkbox" name="impact" value="physical_mental"> Physical or mental harm</label>
+  <label class="inline"><input type="checkbox" name="impact" value="property"> Material or non-material damage to property</label>
+  <label class="inline"><input type="checkbox" name="impact" value="other_impact"> Other (specify below)</label>
+  <label class="inline"><input type="checkbox" name="impact" value="tbd"> To be determined</label>
+</div>
+<label>Further description of impacts</label>
+<textarea id="impactDesc" rows="2"></textarea>
+
+<label>Severity of potential impacts *</label>
+<select id="impactSeverity">
+  <option value="">— select —</option>
+  <option value="minor">Minor</option>
+  <option value="moderate">Moderate</option>
+  <option value="severe">Severe</option>
+  <option value="tbd">To be determined</option>
+</select>
+</fieldset>
+
+<fieldset>
+<legend>4.2 Risk assessment (EDPB) + ENISA severity scoring</legend>
+
+<label>Outcome of risk assessment by the controller *</label>
+<select id="riskOutcome">
+  <option value="">— select —</option>
+  <option value="high_risk">Likely to result in HIGH RISK to rights and freedoms</option>
+  <option value="risk">Likely to result in a (not high) RISK</option>
+  <option value="unlikely">UNLIKELY to result in a risk</option>
+  <option value="tbd">Additional information needed</option>
+</select>
+
+<label>Description of risk assessment methodology *</label>
+<textarea id="riskDesc" rows="3" placeholder="Describe the methodology used and relevant factors considered"></textarea>
+
+<h4>ENISA-style severity scoring (supplementary)</h4>
+<p class="tooltip">This supplementary scoring uses the ENISA methodology to compute a numerical severity. It supports — but does not replace — the controller's own risk assessment above.</p>
+
+<div class="row">
+  <div>
+    <label>Data Processing Context (DPC)</label>
+    <select id="eDPC">
+      <option value="1">1 · Simple (contact, basic profile)</option>
+      <option value="2">2 · Behavioural / financial / location</option>
+      <option value="3">3 · Sensitive (Art. 9, children, credentials)</option>
+      <option value="4">4 · Highly sensitive (genetic, medical, judicial)</option>
+    </select>
+  </div>
+  <div>
+    <label>Ease of Identification (EI)</label>
+    <select id="eEI">
+      <option value="0.25">0.25 · Negligible (pseudonymised)</option>
+      <option value="0.5">0.5 · Limited (requires effort)</option>
+      <option value="0.75">0.75 · Significant (some identifiers)</option>
+      <option value="1">1 · Maximum (direct identifiers in clear)</option>
+    </select>
+  </div>
+</div>
+<div class="row">
+  <div>
+    <label>Circumstances of Breach (CB)</label>
+    <select id="eCB">
+      <option value="0">0 · Confidentiality lost only, low impact</option>
+      <option value="0.25">0.25 · One CIA dimension affected</option>
+      <option value="0.5">0.5 · Two CIA dimensions</option>
+      <option value="0.75">0.75 · All three CIA dimensions</option>
+    </select>
+  </div>
+  <div>
+    <label>Malicious intent (MI)</label>
+    <select id="eMI">
+      <option value="0">No</option>
+      <option value="0.5">Yes</option>
+    </select>
+  </div>
+</div>
+<button class="tbtn" onclick="calcSeverity()" style="margin-top:8px">Calculate severity</button>
+<div id="severityResult" style="margin-top:10px"></div>
+</fieldset>
+
+<fieldset>
+<legend>4.3 Measures taken to address the breach</legend>
+<label>Measures taken to address and mitigate consequences *</label>
+<textarea id="measAddress" rows="4" placeholder="Describe measures and to what extent they resolve the issue"></textarea>
+</fieldset>
+
+<fieldset>
+<legend>4.4 Measures to prevent similar breaches</legend>
+<label>Preventive measures taken * (select all that apply)</label>
+<div class="checkbox-grid">
+  <label class="inline"><input type="checkbox" name="measPost" value="anon"> Anonymisation</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="backup"> Backup / Recovery plan</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="process"> Change of processes</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="encrypt"> Data encryption</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="policy"> DP &amp; InfoSec policies</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="training"> DP &amp; security training</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="erasure"> Erasure of the data</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="incident_log"> Incident log</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="access_levels"> Levels of access to data</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="mfa"> Logical access control (MFA)</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="audit"> Periodic audits</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="physical"> Physical access control</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="pseudo"> Pseudonymisation</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="uptodate"> Up-to-date IT systems</label>
+  <label class="inline"><input type="checkbox" name="measPost" value="other_post"> Other (specify)</label>
+</div>
+<label>Further description of preventive measures *</label>
+<textarea id="measPostDesc" rows="3" placeholder="Describe to what extent measures resolve the issue and improve the situation"></textarea>
+</fieldset>
+
+<div class="nav-row">
+  <button class="tbtn" onclick="goStep(3)">← Back</button>
+  <button class="tbtn primary" onclick="goStep(5)">Next → Communication</button>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     SECTION 5 — COMMUNICATION TO DATA SUBJECTS  (EDPB §5)
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="sec5">
+<h2>§5 — Communication to data subjects</h2>
+<p class="subtitle">EDPB Template §5 · Art. 34 obligations</p>
+
+<fieldset>
+<legend>Communication status</legend>
+
+<label>Has the breach been communicated to data subjects? *</label>
+<select id="subjComm" onchange="toggleConditionals()">
+  <option value="">— select —</option>
+  <option value="yes">Yes</option>
+  <option value="will_date">No, but will be communicated on a specific date</option>
+  <option value="will_tbd">No, but will be communicated (date TBD)</option>
+  <option value="ongoing">No, investigation still ongoing</option>
+  <option value="no_norisk">No — unlikely to result in high risk (Art. 34(1))</option>
+  <option value="no_art343">No — Art. 34(3) condition met</option>
+</select>
+
+<div class="conditional" id="condCommYes">
+  <label>Date information was given to data subjects *</label>
+  <input type="date" id="commDate">
+
+  <label>Number of data subjects informed *</label>
+  <select id="commAll" onchange="toggleConditionals()">
+    <option value="all">All data subjects have been informed</option>
+    <option value="not_all">Not all data subjects have been informed</option>
+  </select>
+
+  <div class="conditional" id="condNotAll">
+    <label>Why not all data subjects have been informed *</label>
+    <textarea id="notAllReason" rows="2"></textarea>
+  </div>
+
+  <label>Means of communication * (select all)</label>
+  <div class="checkbox-grid">
+    <label class="inline"><input type="checkbox" name="commMeans" value="individual"> Individual (letter / email / personal)</label>
+    <label class="inline"><input type="checkbox" name="commMeans" value="public"> Public announcement (website / press / social)</label>
+    <label class="inline"><input type="checkbox" name="commMeans" value="other_means"> Other</label>
+  </div>
+  <label>Further description of means</label>
+  <textarea id="commMeansDesc" rows="2"></textarea>
+
+  <label>Content of the information provided to data subjects *</label>
+  <textarea id="commContent" rows="4" placeholder="Copy the text of the communication, or provide a URL / download link where the SA can consult it"></textarea>
+</div>
+
+<div class="conditional" id="condCommFuture">
+  <label>Future date of communication</label>
+  <input type="date" id="commFutureDate">
+</div>
+
+<div class="conditional" id="condArt343">
+  <label>Which Art. 34(3) condition is met? *</label>
+  <div class="checkbox-grid">
+    <label class="inline"><input type="checkbox" name="art343" value="a"> (a) Appropriate technical/organisational measures applied (e.g. encryption)</label>
+    <label class="inline"><input type="checkbox" name="art343" value="b"> (b) Subsequent measures ensure high risk no longer likely to materialise</label>
+    <label class="inline"><input type="checkbox" name="art343" value="c"> (c) Disproportionate effort — public communication used instead</label>
+  </div>
+  <label>Further description of why conditions are met and measures taken *</label>
+  <textarea id="art343Desc" rows="3"></textarea>
+</div>
+</fieldset>
+
+<div class="nav-row">
+  <button class="tbtn" onclick="goStep(4)">← Back</button>
+  <button class="tbtn primary" onclick="goStep(6)">Next → Cross-border</button>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     SECTION 6 — CROSS-BORDER & OTHER AUTHORITIES  (EDPB §6)
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="sec6">
+<h2>§6 — Cross-border &amp; other authorities</h2>
+<p class="subtitle">EDPB Template §6 · Police/judicial, other SAs, cross-border processing</p>
+
+<fieldset>
+<legend>6.1 Other authorities notified</legend>
+
+<div class="row">
+  <div>
+    <label>Reported to police / judicial authorities?</label>
+    <select id="policeNotif">
+      <option value="">— select —</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+      <option value="unknown">Unknown</option>
+    </select>
+  </div>
+  <div>
+    <label>Notified other supervisory / control bodies?</label>
+    <select id="otherAuthNotif" onchange="toggleConditionals()">
+      <option value="">— select —</option>
+      <option value="yes">Yes</option>
+      <option value="no">No</option>
+      <option value="unknown">Unknown</option>
+    </select>
+  </div>
+</div>
+
+<div class="conditional" id="condOtherAuth">
+  <label>Further information (authority name, case ID)</label>
+  <textarea id="otherAuthDesc" rows="2"></textarea>
+</div>
+</fieldset>
+
+<fieldset>
+<legend>6.2 Cross-border processing (EEA-established controller)</legend>
+
+<label>Does the breach involve cross-border processing by an EEA-established controller? *</label>
+<select id="crossBorderEEA" onchange="toggleConditionals()">
+  <option value="">— select —</option>
+  <option value="yes">Yes</option>
+  <option value="no">No</option>
+  <option value="unknown">Unknown</option>
+</select>
+
+<div class="conditional" id="condCBEEA">
+  <label>Lead supervisory authority *</label>
+  <select id="leadSA">
+    <option value="">— select —</option>
+  </select>
+
+  <label>EEA countries where controller has an establishment (click to select)</label>
+  <div class="country-chips" id="chipsEstab"></div>
+
+  <label>EEA countries where affected data subjects are located (click to select)</label>
+  <div class="country-chips" id="chipsAffected"></div>
+
+  <label>Approximate number of data subjects per selected country</label>
+  <div id="countryNumbers"></div>
+
+  <label>EEA supervisory authorities notified or to be notified</label>
+  <select id="saNotiList" multiple size="6" style="height:auto">
+  </select>
+</div>
+</fieldset>
+
+<fieldset>
+<legend>6.3 Processing at non-EEA establishments</legend>
+
+<label>Does the breach involve processing by a non-EEA controller to which GDPR applies? *</label>
+<select id="crossBorderNonEEA" onchange="toggleConditionals()">
+  <option value="">— select —</option>
+  <option value="yes">Yes</option>
+  <option value="no">No</option>
+  <option value="unknown">Unknown</option>
+</select>
+
+<div class="conditional" id="condCBNonEEA">
+  <label>EEA countries where affected data subjects are located (click to select)</label>
+  <div class="country-chips" id="chipsAffectedNon"></div>
+
+  <label>EEA supervisory authorities notified or to be notified</label>
+  <select id="saNotiListNon" multiple size="6" style="height:auto">
+  </select>
+</div>
+</fieldset>
+
+<div class="nav-row">
+  <button class="tbtn" onclick="goStep(5)">← Back</button>
+  <button class="tbtn primary" onclick="runAssess();goStep(7)">Assess &amp; generate → Output</button>
+</div>
+</div>
+
+<!-- ════════════════════════════════════════════════════════════════════
+     SECTION 7 — OUTPUT  (generated letters, JSON, attachments)
+     ════════════════════════════════════════════════════════════════════ -->
+<div class="section" id="sec7">
+<h2>§7 — Output &amp; generated documents</h2>
+<p class="subtitle">Severity verdict, obligations, generated notification letters, and attachments</p>
+
+<fieldset>
+<legend>Severity verdict</legend>
+<div id="verdictBox">Press <strong>Assess</strong> (toolbar) after completing Sections 3–4.</div>
+</fieldset>
+
+<fieldset>
+<legend>Obligations under GDPR</legend>
+<div id="obligationsBox">Computed from severity, risk assessment, and sensitivity flags.</div>
+</fieldset>
+
+<fieldset>
+<legend>SA notification letter (Art. 33)</legend>
+<div class="output-panel" id="art33Letter">Press Assess to generate.</div>
+<button class="tbtn" onclick="copyText('art33Letter')">📋 Copy</button>
+</fieldset>
+
+<fieldset>
+<legend>Data subject communication (Art. 34)</legend>
+<div class="output-panel" id="art34Letter">Generated when severity is High/Critical or risk assessment indicates high risk.</div>
+<button class="tbtn" onclick="copyText('art34Letter')">📋 Copy</button>
+</fieldset>
+
+<fieldset>
+<legend>7 · Attachments</legend>
+<label>Identify attachments to this notification</label>
+<div class="checkbox-grid">
+  <label class="inline"><input type="checkbox" name="attach" value="comm_copy"> Dated copy of communication to data subjects</label>
+  <label class="inline"><input type="checkbox" name="attach" value="risk_copy"> Dated copy of risk assessment</label>
+  <label class="inline"><input type="checkbox" name="attach" value="research_copy"> Dated copy of research report (cyber incidents)</label>
+  <label class="inline"><input type="checkbox" name="attach" value="ransom_copy"> Dated copy of ransomware note</label>
+  <label class="inline"><input type="checkbox" name="attach" value="phish_copy"> Dated copy of phishing message</label>
+  <label class="inline"><input type="checkbox" name="attach" value="procedure_copy"> Dated copy of internal breach procedure</label>
+  <label class="inline"><input type="checkbox" name="attach" value="deletion_copy"> Dated copy of data deletion policy</label>
+  <label class="inline"><input type="checkbox" name="attach" value="wrong_recip_copy"> Dated copy of communication to wrong recipients</label>
+  <label class="inline"><input type="checkbox" name="attach" value="ext_notif_copy"> Dated copy of external notification</label>
+  <label class="inline"><input type="checkbox" name="attach" value="other_attach"> Other</label>
+</div>
+<label>Other attachments description</label>
+<textarea id="otherAttachDesc" rows="2"></textarea>
+</fieldset>
+
+<div class="nav-row">
+  <button class="tbtn" onclick="goStep(6)">← Back</button>
+  <span></span>
+</div>
+</div>
+
+</div><!-- /container -->
+
+<script>
+/* ═══════════════════════════════════════════════════════════════
+   DATA
+   ═══════════════════════════════════════════════════════════════ */
+const EEA_COUNTRIES = [
+  'AT','BE','BG','CY','CZ','DE','DK','EE','ES','FI','FR','GR','HR',
+  'HU','IE','IS','IT','LI','LT','LU','LV','MT','NL','NO','PL','PT',
+  'RO','SE','SI','SK'
+];
+const EEA_NAMES = {
+  AT:'Austria',BE:'Belgium',BG:'Bulgaria',CY:'Cyprus',CZ:'Czech Republic',
+  DE:'Germany',DK:'Denmark',EE:'Estonia',ES:'Spain',FI:'Finland',FR:'France',
+  GR:'Greece',HR:'Croatia',HU:'Hungary',IE:'Ireland',IS:'Iceland',IT:'Italy',
+  LI:'Liechtenstein',LT:'Lithuania',LU:'Luxembourg',LV:'Latvia',MT:'Malta',
+  NL:'Netherlands',NO:'Norway',PL:'Poland',PT:'Portugal',RO:'Romania',
+  SE:'Sweden',SI:'Slovenia',SK:'Slovakia'
+};
+
+const SA_LIST = [
+  'Austria - Datenschutzbehörde',
+  'Belgium - Autorité de protection des données',
+  'Bulgaria - Комисия за защита на личните данни',
+  'Croatia - Agencija za zaštitu osobnih podataka',
+  'Cyprus - Γραφείο Επιτρόπου Προστασίας Δεδομένων',
+  'Czech Republic - Úřad pro ochranu osobních údajů',
+  'Denmark - Datatilsynet',
+  'Estonia - Andmekaitse Inspektsioon',
+  'Finland - Tietosuojavaltuutetun Toimisto',
+  'France - CNIL',
+  'Germany (Federal) - BfDI',
+  'Germany (Baden-Württemberg) - LfDI BW',
+  'Germany (Bavaria - Private) - BayLDA',
+  'Germany (Bavaria - Public) - BayLfD',
+  'Germany (Berlin) - BlnBDI',
+  'Germany (Brandenburg) - LDA Brandenburg',
+  'Germany (Bremen) - LfDI Bremen',
+  'Germany (Hamburg) - HmbBfDI',
+  'Germany (Hesse) - HBDI',
+  'Germany (Lower Saxony) - LfD Niedersachsen',
+  'Germany (Mecklenburg-W.P.) - LfDI MV',
+  'Germany (NRW) - LDI NRW',
+  'Germany (Rhineland-Palatinate) - LfDI RP',
+  'Germany (Saarland) - UDZ Saarland',
+  'Germany (Saxony) - SDTB',
+  'Germany (Saxony-Anhalt) - LfD LSA',
+  'Germany (Schleswig-Holstein) - ULD',
+  'Germany (Thuringia) - TLfDI',
+  'Greece - HDPA',
+  'Hungary - NAIH',
+  'Iceland - Persónuvernd',
+  'Ireland - Data Protection Commission',
+  'Italy - Garante per la protezione dei dati personali',
+  'Latvia - Datu valsts inspekcija',
+  'Liechtenstein - Datenschutzstelle',
+  'Lithuania - VDAI',
+  'Luxembourg - CNPD',
+  'Malta - IDPC',
+  'Netherlands - Autoriteit Persoonsgegevens',
+  'Norway - Datatilsynet',
+  'Poland - UODO',
+  'Portugal - CNPD',
+  'Romania - ANSPDCP',
+  'Slovakia - ÚOOU SR',
+  'Slovenia - Informacijski pooblaščenec',
+  'Spain - AEPD',
+  'Sweden - IMY'
+];
+
+/* ═══════════════════════════════════════════════════════════════
+   INIT
+   ═══════════════════════════════════════════════════════════════ */
+document.addEventListener('DOMContentLoaded',()=>{
+  populateSAs();
+  buildCountryChips('chipsEstab');
+  buildCountryChips('chipsAffected');
+  buildCountryChips('chipsAffectedNon');
+  toggleConditionals();
+});
+
+function populateSAs(){
+  const sel=document.getElementById('leadSA');
+  SA_LIST.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;sel.appendChild(o)});
+  ['saNotiList','saNotiListNon'].forEach(id=>{
+    const el=document.getElementById(id);
+    SA_LIST.forEach(s=>{const o=document.createElement('option');o.value=s;o.textContent=s;el.appendChild(o)});
+  });
+}
+
+function buildCountryChips(containerId){
+  const c=document.getElementById(containerId);
+  EEA_COUNTRIES.forEach(code=>{
+    const chip=document.createElement('span');
+    chip.className='country-chip';
+    chip.dataset.code=code;
+    chip.textContent=code;
+    chip.title=EEA_NAMES[code];
+    chip.onclick=()=>{chip.classList.toggle('selected');updateCountryNumbers()};
+    c.appendChild(chip);
+  });
+}
+
+function updateCountryNumbers(){
+  const box=document.getElementById('countryNumbers');
+  const selected=[...document.querySelectorAll('#chipsAffected .country-chip.selected')].map(c=>c.dataset.code);
+  box.innerHTML='';
+  if(!selected.length){box.innerHTML='<p class="tooltip">Select countries above to enter numbers.</p>';return}
+  selected.forEach(code=>{
+    const row=document.createElement('div');
+    row.className='row';
+    row.style.marginBottom='4px';
+    row.innerHTML=`<label style="margin:0;line-height:32px">${EEA_NAMES[code]} (${code})</label><input type="number" min="0" id="cn_${code}" placeholder="Approx. number" style="max-width:200px">`;
+    box.appendChild(row);
+  });
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   STEP NAVIGATION
+   ═══════════════════════════════════════════════════════════════ */
+function goStep(n){
+  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
+  document.getElementById('sec'+n).classList.add('active');
+  document.querySelectorAll('.step-pill').forEach(p=>{
+    const ps=parseInt(p.dataset.step);
+    p.classList.remove('active');
+    if(ps===n) p.classList.add('active');
+  });
+  window.scrollTo(0,0);
+  toggleConditionals();
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   CONDITIONAL LOGIC
+   ═══════════════════════════════════════════════════════════════ */
+function toggleConditionals(){
+  const notifType=v('notifType');
+  const notifSub=v('notifSubType');
+  // Withdraw option only on follow-up
+  document.getElementById('optWithdraw').style.display=(notifType==='followup')?'':'none';
+  if(notifType!=='followup'&&notifSub==='withdraw') document.getElementById('notifSubType').value='';
+  show('condWithdraw',notifSub==='withdraw');
+  show('condPrevId',notifType==='followup');
+
+  // Controller
+  show('condOrgTypeOther',v('ctrlOrgType')==='other');
+  show('condRepEEA',v('ctrlInEEA')==='no');
+  show('condRepFuncOther',v('repPersonFunc')==='other');
+  show('condDPO',v('dpoDesignated')==='yes');
+  show('condContactOther',v('contactPoint')==='other');
+  show('condOtherParties',v('otherParties')==='yes');
+
+  // Breach dates
+  const bw=v('breachWhen');
+  show('condBreachDates',['specific','range','ongoing'].includes(bw));
+  document.getElementById('breachEndWrap').style.display=(['specific','range'].includes(bw))?'':'none';
+
+  // Late notification warning
+  const aware=document.getElementById('awareAt').value;
+  if(aware){
+    const awareMs=new Date(aware).getTime();
+    const now=Date.now();
+    show('lateNotifWarn',(now-awareMs)>72*3600*1000 && notifType==='new');
+  }
+
+  // External discovery date
+  const how=v('howDiscovered');
+  show('condExtDate',['processor','subject','external','press','other'].includes(how));
+
+  // Nature sub-fields
+  const conf=document.getElementById('natConf').checked;
+  const integ=document.getElementById('natInteg').checked;
+  const avail=document.getElementById('natAvail').checked;
+  show('condConf',conf);
+  show('condInteg',integ);
+  show('condAvail',avail);
+  // Consequence sub-fields in §4
+  document.getElementById('confConseq').style.display=conf?'block':'none';
+  document.getElementById('integConseq').style.display=integ?'block':'none';
+  document.getElementById('availConseq').style.display=avail?'block':'none';
+
+  // Communication
+  const sc=v('subjComm');
+  show('condCommYes',sc==='yes');
+  show('condCommFuture',sc==='will_date');
+  show('condArt343',sc==='no_art343');
+  show('condNotAll',v('commAll')==='not_all');
+
+  // Cross-border
+  show('condCBEEA',v('crossBorderEEA')==='yes');
+  show('condCBNonEEA',v('crossBorderNonEEA')==='yes');
+  show('condOtherAuth',v('otherAuthNotif')==='yes'||v('policeNotif')==='yes');
+}
+
+function v(id){return document.getElementById(id)?.value||''}
+function show(id,cond){const el=document.getElementById(id);if(el){if(cond)el.classList.add('show');else el.classList.remove('show')}}
+
+/* ═══════════════════════════════════════════════════════════════
+   OTHER PARTIES (dynamic add)
+   ═══════════════════════════════════════════════════════════════ */
+let partyCount=0;
+function addParty(){
+  partyCount++;
+  const box=document.getElementById('partyList');
+  const div=document.createElement('div');
+  div.style.cssText='border:1px solid var(--border);border-radius:var(--radius);padding:10px;margin:8px 0';
+  div.innerHTML=`
+    <div class="row">
+      <div><label>Qualification</label><select id="partyRole${partyCount}">
+        <option value="processor">Data Processor</option>
+        <option value="joint">Joint Controller</option>
+        <option value="other">Other</option>
+      </select></div>
+      <div><label>Name *</label><input type="text" id="partyName${partyCount}"></div>
+    </div>
+    <label>Contact details *</label>
+    <textarea id="partyContact${partyCount}" rows="2"></textarea>`;
+  box.appendChild(div);
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ENISA SEVERITY
+   ═══════════════════════════════════════════════════════════════ */
+function calcSeverity(){
+  const dpc=parseFloat(v('eDPC'));
+  const ei=parseFloat(v('eEI'));
+  const cb=parseFloat(v('eCB'));
+  const mi=parseFloat(v('eMI'));
+  const score=dpc*ei+cb+mi;
+  let level,cls;
+  if(score>=4){level='Critical';cls='critical'}
+  else if(score>=3){level='High';cls='high'}
+  else if(score>=2){level='Medium';cls='medium'}
+  else{level='Low';cls='low'}
+  document.getElementById('severityResult').innerHTML=`
+    <strong>Severity score: ${score.toFixed(2)}</strong> — <span class="badge ${cls}">${level}</span>
+    <div class="severity-meter"><div class="fill" style="width:${Math.min(score/5*100,100)}%;background:var(--${cls})"></div></div>
+    <p class="tooltip">Formula: DPC(${dpc}) × EI(${ei}) + CB(${cb}) + MI(${mi}) = ${score.toFixed(2)}. Thresholds: &lt;2 Low · 2–3 Medium · 3–4 High · ≥4 Critical.</p>`;
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   ASSESS — generate output
+   ═══════════════════════════════════════════════════════════════ */
+function runAssess(){
+  calcSeverity();
+  const ro=v('riskOutcome');
+  const is_=v('impactSeverity');
+
+  // Verdict
+  const verdictBox=document.getElementById('verdictBox');
+  let verdictHTML='';
+  if(ro==='high_risk'){
+    verdictHTML=`<span class="badge critical">HIGH RISK</span> — Controller assessed this breach as likely to result in a high risk to the rights and freedoms of natural persons.`;
+  }else if(ro==='risk'){
+    verdictHTML=`<span class="badge medium">RISK (not high)</span> — Controller assessed this breach as likely to result in a risk, but not a high risk.`;
+  }else if(ro==='unlikely'){
+    verdictHTML=`<span class="badge low">UNLIKELY RISK</span> — Controller assessed this breach as unlikely to result in a risk.`;
+  }else{
+    verdictHTML=`<span class="badge medium">PENDING</span> — Additional information needed to complete risk assessment.`;
+  }
+  const severityEl=document.getElementById('severityResult');
+  if(severityEl.innerHTML) verdictHTML+=`<br><br><strong>ENISA supplementary score:</strong> `+severityEl.innerHTML;
+  verdictBox.innerHTML=verdictHTML;
+
+  // Obligations
+  const obBox=document.getElementById('obligationsBox');
+  let obHTML='<table class="obligations-table"><thead><tr><th>Obligation</th><th>Trigger</th><th>Status</th></tr></thead><tbody>';
+  // Art. 33 — notify SA
+  const notifySA = ro!=='unlikely';
+  obHTML+=`<tr><td>Art. 33 — Notify supervisory authority</td><td>${notifySA?'Risk assessment: risk identified':'No risk identified'}</td><td>${notifySA?'<span class="badge high">Required within 72h</span>':'<span class="badge low">Not required</span>'}</td></tr>`;
+  // Art. 34 — notify subjects
+  const notifySubj = ro==='high_risk';
+  obHTML+=`<tr><td>Art. 34 — Communicate to data subjects</td><td>${notifySubj?'High risk to rights and freedoms':'Risk not assessed as high'}</td><td>${notifySubj?'<span class="badge high">Required without undue delay</span>':'<span class="badge low">Not required (unless reassessed)</span>'}</td></tr>`;
+  // Art. 33(5) — document
+  obHTML+=`<tr><td>Art. 33(5) — Document the breach</td><td>All breaches</td><td><span class="badge medium">Always required</span></td></tr>`;
+  obHTML+='</tbody></table>';
+  obBox.innerHTML=obHTML;
+
+  // Art. 33 letter
+  generateArt33();
+  // Art. 34 letter
+  if(notifySubj) generateArt34();
+  else document.getElementById('art34Letter').textContent='Art. 34 communication not triggered — risk assessment outcome does not indicate high risk. If the assessment changes, re-run Assess.';
+}
+
+function generateArt33(){
+  const ref=v('internalRef')||'[Ref]';
+  const ctrl=v('ctrlName')||'[Controller]';
+  const contact=v('ctrlContact')||'[Contact details]';
+  const dpo=v('dpoName')||v('repPersonName')||'[DPO/Contact]';
+  const dpoC=v('dpoContact')||v('repPersonContact')||'[DPO contact]';
+  const aware=v('awareAt')?new Date(v('awareAt')).toLocaleString():'[Date/Time]';
+  const nature=[];
+  if(document.getElementById('natConf').checked) nature.push('Confidentiality');
+  if(document.getElementById('natInteg').checked) nature.push('Integrity');
+  if(document.getElementById('natAvail').checked) nature.push('Availability');
+  const dsNum=v('dsNum')||'[number]';
+  const recNum=v('recNum')||'[number]';
+  const desc=v('incidentDesc')||'[Description of incident]';
+  const conseq=v('impactDesc')||'[Likely consequences]';
+  const meas=v('measAddress')||'[Measures taken]';
+  const leadSA=v('leadSA')||'[Lead SA]';
+
+  const letter=`PERSONAL DATA BREACH NOTIFICATION UNDER ARTICLE 33 GDPR
+══════════════════════════════════════════════════════════
+Reference: ${ref}
+Date of notification: ${new Date().toLocaleDateString()}
+
+To: ${leadSA}
+
+1. DATA CONTROLLER
+Name: ${ctrl}
+Contact: ${contact}
+
+2. DPO / CONTACT POINT
+${dpo}
+${dpoC}
+
+3. BREACH DETAILS
+Date/time controller became aware: ${aware}
+Nature of breach: ${nature.join(', ')||'[Not specified]'}
+
+Description:
+${desc}
+
+4. SCOPE
+Approximate number of data subjects: ${dsNum}
+Approximate number of data records: ${recNum}
+
+Categories of data affected:
+${getCheckedLabels('dataCat')}
+
+Categories of data subjects:
+${getCheckedLabels('dsCat')}
+
+5. LIKELY CONSEQUENCES
+${conseq}
+
+6. MEASURES TAKEN OR PROPOSED
+${meas}
+
+7. RISK ASSESSMENT
+Outcome: ${document.getElementById('riskOutcome').selectedOptions[0]?.textContent||'[Not assessed]'}
+${v('riskDesc')}
+
+══════════════════════════════════════════════════════════
+This notification is made pursuant to Article 33 of Regulation (EU) 2016/679 (GDPR).
+Structure follows the EDPB common template for personal data breach notification (v1.0, 8 June 2026).`;
+
+  document.getElementById('art33Letter').textContent=letter;
+}
+
+function generateArt34(){
+  const ctrl=v('ctrlName')||'[Controller]';
+  const dpo=v('dpoName')||v('repPersonName')||'[DPO/Contact]';
+  const dpoC=v('dpoContact')||v('repPersonContact')||'[Contact details]';
+  const nature=[];
+  if(document.getElementById('natConf').checked) nature.push('confidentiality');
+  if(document.getElementById('natInteg').checked) nature.push('integrity');
+  if(document.getElementById('natAvail').checked) nature.push('availability');
+  const desc=v('incidentDesc')||'[Description]';
+  const conseq=v('impactDesc')||'[Likely consequences]';
+  const meas=v('measAddress')||'[Measures taken]';
+
+  const letter=`COMMUNICATION OF PERSONAL DATA BREACH TO DATA SUBJECTS
+UNDER ARTICLE 34 GDPR
+══════════════════════════════════════════════════════════
+
+Dear Data Subject,
+
+We are writing to inform you of a personal data breach that may affect your personal data.
+
+WHAT HAPPENED
+${desc}
+
+NATURE OF THE BREACH
+This incident involved a breach of ${nature.join(', ')||'personal data'}.
+
+WHAT DATA WAS AFFECTED
+${getCheckedLabels('dataCat')}
+
+LIKELY CONSEQUENCES FOR YOU
+${conseq}
+
+WHAT WE ARE DOING
+${meas}
+
+WHAT YOU CAN DO
+We recommend that you:
+• Monitor your accounts for unusual activity
+• Be vigilant about unsolicited communications
+• Consider changing passwords if credentials were affected
+• Contact us if you notice anything suspicious
+
+CONTACT
+For further information, please contact our Data Protection Officer:
+${dpo}
+${dpoC}
+
+You also have the right to lodge a complaint with your supervisory authority.
+
+${ctrl}
+Date: ${new Date().toLocaleDateString()}
+
+══════════════════════════════════════════════════════════
+This communication is made pursuant to Article 34 of Regulation (EU) 2016/679 (GDPR).`;
+
+  document.getElementById('art34Letter').textContent=letter;
+}
+
+function getCheckedLabels(name){
+  return [...document.querySelectorAll(`input[name="${name}"]:checked`)]
+    .map(cb=>{const lbl=cb.closest('label');return lbl?'• '+lbl.textContent.trim():'• '+cb.value})
+    .join('\n')||'[None selected]';
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   SAVE / LOAD / EXPORT
+   ═══════════════════════════════════════════════════════════════ */
+const STORE_KEY='gdpr_breach_edpb_';
+
+function gatherData(){
+  const data={};
+  document.querySelectorAll('input[type=text],input[type=number],input[type=date],input[type=datetime-local],input[type=email],input[type=tel],textarea,select').forEach(el=>{
+    if(el.id) data[el.id]=el.value;
+  });
+  document.querySelectorAll('input[type=checkbox]').forEach(cb=>{
+    const key=cb.id||cb.name+'_'+cb.value;
+    data['cb_'+key]=cb.checked;
+  });
+  // Country chips
+  ['chipsEstab','chipsAffected','chipsAffectedNon'].forEach(cid=>{
+    data['sel_'+cid]=[...document.querySelectorAll(`#${cid} .selected`)].map(c=>c.dataset.code);
+  });
+  // Multi-select
+  ['saNotiList','saNotiListNon'].forEach(sid=>{
+    data['ms_'+sid]=[...document.getElementById(sid).selectedOptions].map(o=>o.value);
+  });
+  data._ref=v('internalRef')||'BREACH-'+Date.now();
+  data._updated=new Date().toISOString();
+  return data;
+}
+
+function restoreData(data){
+  Object.entries(data).forEach(([k,val])=>{
+    if(k.startsWith('cb_')){
+      const realKey=k.slice(3);
+      let el=document.getElementById(realKey);
+      if(!el){
+        const [name,...rest]=realKey.split('_');
+        const value=rest.join('_');
+        el=document.querySelector(`input[name="${name}"][value="${value}"]`);
+      }
+      if(el) el.checked=val;
+    }else if(k.startsWith('sel_')){
+      const cid=k.slice(4);
+      (val||[]).forEach(code=>{
+        const chip=document.querySelector(`#${cid} .country-chip[data-code="${code}"]`);
+        if(chip) chip.classList.add('selected');
+      });
+    }else if(k.startsWith('ms_')){
+      const sid=k.slice(3);
+      const el=document.getElementById(sid);
+      if(el)(val||[]).forEach(v=>{[...el.options].forEach(o=>{if(o.value===v)o.selected=true})});
+    }else if(!k.startsWith('_')){
+      const el=document.getElementById(k);
+      if(el) el.value=val;
+    }
+  });
+  toggleConditionals();
+  updateCountryNumbers();
+}
+
+function saveLocal(){
+  const data=gatherData();
+  const ref=data._ref;
+  localStorage.setItem(STORE_KEY+ref,JSON.stringify(data));
+  // Also register in dashboard
+  try{
+    const dash=JSON.parse(localStorage.getItem('gdpr_dashboard_records')||'[]');
+    const idx=dash.findIndex(r=>r.ref===ref&&r.type==='breach');
+    const rec={type:'breach',ref,controller:v('ctrlName'),status:v('notifSubType')||'draft',severity:v('impactSeverity')||'',updated:new Date().toISOString(),url:'breach.html?ref='+encodeURIComponent(ref)};
+    if(idx>=0) dash[idx]=rec; else dash.push(rec);
+    localStorage.setItem('gdpr_dashboard_records',JSON.stringify(dash));
+  }catch(e){}
+  alert('Saved: '+ref);
+}
+
+function loadLocal(){
+  const keys=[];
+  for(let i=0;i<localStorage.length;i++){
+    const k=localStorage.key(i);
+    if(k.startsWith(STORE_KEY)) keys.push(k.replace(STORE_KEY,''));
+  }
+  if(!keys.length){alert('No saved breach records found.');return}
+  const ref=prompt('Available records:\n'+keys.join('\n')+'\n\nEnter reference to load:');
+  if(!ref) return;
+  const raw=localStorage.getItem(STORE_KEY+ref);
+  if(!raw){alert('Not found: '+ref);return}
+  restoreData(JSON.parse(raw));
+}
+
+function exportJSON(){
+  const data=gatherData();
+  const blob=new Blob([JSON.stringify(data,null,2)],{type:'application/json'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='breach-'+( v('internalRef')||'export')+'.json';
+  a.click();
+}
+
+function exportHTML(){
+  runAssess();
+  const art33=document.getElementById('art33Letter').textContent;
+  const art34=document.getElementById('art34Letter').textContent;
+  const verdict=document.getElementById('verdictBox').innerHTML;
+  const html=`<!DOCTYPE html><html><head><meta charset="utf-8"><title>Breach Report — ${v('internalRef')||'Export'}</title>
+<style>body{font:14px/1.7 -apple-system,sans-serif;max-width:800px;margin:40px auto;padding:0 20px}pre{white-space:pre-wrap;background:#f5f5f5;padding:16px;border-radius:6px;font-size:13px}h2{border-bottom:2px solid #2563eb;padding-bottom:4px;margin-top:32px}.badge{display:inline-block;font-size:12px;font-weight:700;padding:2px 10px;border-radius:12px}.critical{background:#fee2e2;color:#991b1b}.high{background:#fecaca;color:#dc2626}.medium{background:#fef3c7;color:#92400e}.low{background:#dcfce7;color:#166534}</style></head>
+<body><h1>Breach Notification Report</h1><p>Generated: ${new Date().toLocaleString()}</p><p>Reference: ${v('internalRef')||'—'}</p>
+<h2>Severity &amp; Obligations</h2>${verdict}
+<h2>Art. 33 — SA Notification</h2><pre>${escHTML(art33)}</pre>
+<h2>Art. 34 — Data Subject Communication</h2><pre>${escHTML(art34)}</pre>
+</body></html>`;
+  const blob=new Blob([html],{type:'text/html'});
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(blob);
+  a.download='breach-report-'+( v('internalRef')||'export')+'.html';
+  a.click();
+}
+
+function escHTML(s){return s.replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+
+function copyText(id){
+  const text=document.getElementById(id).textContent;
+  navigator.clipboard.writeText(text).then(()=>alert('Copied to clipboard')).catch(()=>{});
+}
+
+/* ═══════════════════════════════════════════════════════════════
+   URL PARAMS — auto-load or new
+   ═══════════════════════════════════════════════════════════════ */
+(function(){
+  const params=new URLSearchParams(location.search);
+  if(params.get('new')==='1'){
+    document.getElementById('internalRef').value='BREACH-'+Date.now().toString(36).toUpperCase();
+  }
+  const ref=params.get('ref');
+  if(ref){
+    const raw=localStorage.getItem(STORE_KEY+ref);
+    if(raw) restoreData(JSON.parse(raw));
+  }
+})();
+</script>
+</body>
+</html>
